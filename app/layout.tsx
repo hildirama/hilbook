@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, IBM_Plex_Serif, Mona_Sans } from "next/font/google";
+import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs'
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
@@ -24,16 +25,18 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${ibmPlexSerif.variable} ${monaSans.variable} relative font-sans antialiased`}
-      >
-        <Navbar />
-        {children}
+      <body className={`${ibmPlexSerif.variable} ${monaSans.variable} antialiased`}>
+
+        <ClerkProvider>
+          <Navbar />
+          
+          {children}
+        </ClerkProvider>
       </body>
     </html>
-  );
+  )
 }
