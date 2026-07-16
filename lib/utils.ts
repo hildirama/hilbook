@@ -90,6 +90,9 @@ export const formatDuration = (seconds: number): string => {
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 };
 
+
+
+
 export async function parsePDFFile(file: File) {
   try {
     const pdfjsLib = await import('pdfjs-dist');
@@ -145,6 +148,7 @@ export async function parsePDFFile(file: File) {
     // Split text into segments for search
     const segments = splitIntoSegments(fullText);
 
+    // Clean up PDF document resources
     // Clean up PDF document resources
     await pdfDocument.destroy();
 

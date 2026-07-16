@@ -29,15 +29,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={`${ibmPlexSerif.variable} ${monaSans.variable} antialiased`}>
-
-        <ClerkProvider>
           <Navbar />
           {children}
           <Toaster />
-        </ClerkProvider>
       </body>
     </html>
+    </ClerkProvider>
   )
 }
