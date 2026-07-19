@@ -14,12 +14,11 @@ import FileUploader from './FileUploader';
 import VoiceSelector from './VoiceSelector';
 import LoadingOverlay from './LoadingOverlay';
 import {useAuth, useUser} from "@clerk/nextjs";
-import {useRouter} from "next/navigation";
 import { toast } from 'sonner';
 import {checkBookExists, createBook, saveBookSegments} from "@/lib/actions/book.actions";
+import {useRouter} from "next/navigation";
 import {parsePDFFile} from "@/lib/utils";
 import {upload} from "@vercel/blob/client";
-
 
 const UploadForm = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -111,7 +110,10 @@ const UploadForm = () => {
             });
 
             if(!book.success) {
-                toast.error("Failed to create book");
+                toast.error(book.error as string || "Failed to create book");
+                if (book.isBillingError) {
+                    router.push("/subscriptions");
+                }
                 return;
             }
 
